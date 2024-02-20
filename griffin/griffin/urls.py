@@ -20,7 +20,12 @@ from griffin_flight import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('admins/', views.admin),
     path('books/', views.book),
     path('users/', views.user),
+    path('flights/', views.flight),
+    path('airplanes/', views.airplane),
+    path('airports/', views.airport),
+    path('passports/', views.passport),
 ]

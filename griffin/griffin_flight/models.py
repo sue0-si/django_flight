@@ -46,9 +46,9 @@ class Flights(models.Model):
     arrival_time = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     is_deleted = models.SmallIntegerField(default=0)
-    departure_loc = models.ForeignKey(Airports, on_delete=models.RESTRICT, related_name='departures')
-    arrival_loc = models.ForeignKey(Airports, on_delete=models.RESTRICT, related_name='arrivals')
-    airplane_id = models.ForeignKey(Airplanes, on_delete=models.RESTRICT)
+    departure_loc = models.ForeignKey(Airports, on_delete=models.RESTRICT, related_name='departures', db_column='departure_loc')
+    arrival_loc = models.ForeignKey(Airports, on_delete=models.RESTRICT, related_name='arrivals', db_column='arrival_loc')
+    airplane_id = models.ForeignKey(Airplanes, on_delete=models.RESTRICT, db_column='airplane_id')
 
     class Meta:
         managed = False
@@ -68,8 +68,8 @@ class Users(models.Model):
 
 class Books(models.Model):
     book_id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(Users, on_delete=models.RESTRICT)
-    flight_id = models.ForeignKey(Flights, on_delete=models.RESTRICT)
+    user_id = models.ForeignKey(Users, on_delete=models.RESTRICT, db_column='user_id')
+    flight_id = models.ForeignKey(Flights, on_delete=models.RESTRICT, db_column='flight_id')
     class_seat = models.CharField(max_length=100)
     status = models.IntegerField()
     pay_status = models.IntegerField()
@@ -88,7 +88,7 @@ class Passports(models.Model):
     email = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
     birthday = models.CharField(max_length=100)
-    book_id = models.ForeignKey(Books, on_delete=models.RESTRICT)
+    book_id = models.ForeignKey(Books, on_delete=models.RESTRICT, db_column='book_id')
     created_at = models.DateTimeField(auto_now_add=True)
     is_deleted = models.SmallIntegerField(default=0)
 
